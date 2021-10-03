@@ -1,0 +1,14 @@
+body {
+   /* Путь к фоновому изображению */
+  background-color: #c3e2e2; /* Цвет фона */
+  background-position: center center;
+  background-image: url(карта/карта2.png);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.bg_img {
+  text-align: center;
+  margin-top: 20px;
+}
