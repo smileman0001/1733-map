@@ -2,7 +2,6 @@ body {
    /* Путь к фоновому изображению */
   background-color: #c3e2e2; /* Цвет фона */
   background-position: center center;
-  background-image: url(карта/карта2.png);
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
@@ -11,4 +10,22 @@ body {
 .bg_img {
   text-align: center;
   margin-top: 20px;
+}
+
+footer {
+  background-color:  #424242;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+}
+
+header {
+  background-color: #424242;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
 }
