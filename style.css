@@ -1,5 +1,6 @@
 body {
    /* Путь к фоновому изображению */
+  background-image: url(карта/back.svg);
   background-color: #c3e2e2; /* Цвет фона */
   background-position: center center;
   background-repeat: no-repeat;
@@ -36,7 +37,7 @@ main {
   /* background-color: #00ffff; */
 }
 
-img {
+div {
   /* height: 100%;
   width: 100%;
   position: center center;
@@ -45,4 +46,48 @@ img {
   object-fit: contain;
   width: 100%;
   height: 70%;
+}
+
+#ship {
+  fill: #FF0000;
+}
+
+#track {
+  fill: none;
+  stroke: #4974AD;
+  stroke-width: 4px;
+/*  stroke-dasharray: 2px 5px;*/
+}
+
+circle {
+  cursor: pointer;
+  fill: steelblue;
+  stroke-width: 0;
+  transition: 0.5s;
+}
+
+rect {
+  fill: transparent;
+  transition: 0.5s;
+}
+
+text {
+  text-anchor: middle;
+  font-family: Arial;
+  font-size: 12px;
+  user-select: none;
+}
+
+.active circle {
+  fill: #e53326;
+  stroke: #e53326;
+  stroke-width: 3px;
+}
+
+.active rect {
+  fill: #e53326;
+}
+
+.active text {
+  fill: #ffffff;
 }
