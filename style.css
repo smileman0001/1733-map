@@ -37,17 +37,6 @@ main {
   /* background-color: #00ffff; */
 }
 
-div {
-  /* height: 100%;
-  width: 100%;
-  position: center center;
-  repeat: no-repeat;
-  attachment: fixed; */
-  object-fit: contain;
-  width: 100%;
-  height: 70%;
-}
-
 #ship {
   /*fill: #FF0000;*/
 }
@@ -56,6 +45,7 @@ div {
   fill: none;
   stroke: #4974AD;
   stroke-width: 4px;
+/*  width: 1500px;*/
 /*  stroke-dasharray: 2px 5px;*/
 }
 
