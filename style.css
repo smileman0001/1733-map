@@ -8,6 +8,14 @@ body {
   background-size: cover;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+#header_content_container {
+  max-width: 1023px;
+}
+
 .bg_img {
   text-align: center;
   margin-top: 20px;
