@@ -12,8 +12,14 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
 }
 
-#header_content_container {
+.header_content_container {
   max-width: 1023px;
+}
+
+#map_div {
+  margin-top: 150px;
+  width: 1139px;
+  height: 585px;
 }
 
 .bg_img {
@@ -64,7 +70,7 @@ main {
 
 circle {
   cursor: pointer;
-  fill: steelblue;
+  fill: #C1C1C1;
   stroke-width: 0;
   transition: 0.5s;
 }
@@ -79,6 +85,7 @@ text {
   font-family: Arial;
   font-size: 12px;
   user-select: none;
+  pointer-events: none;
 }
 
 .active circle {
