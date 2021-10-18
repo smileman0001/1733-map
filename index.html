@@ -146,13 +146,16 @@
             let value = $('.scroll').prev().attr('value');
             $('.scroll').html(value);
             $('.scroll').on('input',function(){
-              circles.forEach(c => {
-                if(c.getAttribute("id") === $('.scroll').val() - 1)
-                  target = +c.dataset.len;
-              })
+              let qs = document.querySelector('circle[id="'+($('.scroll').val() - 1)+'"]');
+              if (qs != null)
+                target = +qs.getAttribute('data-len');
+              // circles.forEach(c => {
+              //   if(c.getAttribute("id") === $('.scroll').val() - 1)
+              //     target = +c.dataset.len;
+              // })
               // target = +circles.item($('.scroll').val() - 1).dataset.len;
               //circles.item($('.scroll').val() - 1).parentNode.classList.toggle('active');
-              console.log( $('.scroll').val())
+              // console.log( $('.scroll').val())
             })
         </script>
       </div>
