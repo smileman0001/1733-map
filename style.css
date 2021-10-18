@@ -1,3 +1,47 @@
+/* основное */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+main {
+  width: 100%;
+  /* height: 500px; */
+  /* background-color: #00ffff; */
+}
+
+text {
+  text-anchor: middle;
+  font-family: Arial;
+  font-size: 12px;
+  user-select: none;
+  pointer-events: none;
+}
+
+.wrapper {
+  min-height: 100%;
+  overflow: hidden;   /*убирает горизонтальный дефолтный скрол на сайте */
+}
+
+
+
+/* хедер */
+header {
+  background-color: #424242;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  display: flex;
+}
+
+.header_content_container {
+  max-width: 1023px;
+}
+
+
+
+/* боди */
 body {
    /* Путь к фоновому изображению */
   background-image: url(карта/back.svg);
@@ -8,51 +52,18 @@ body {
   background-size: cover;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  margin: 0;
-}
-
-.header_content_container {
-  max-width: 1023px;
-}
-
-#map_div {
-  margin-top: 150px;
-  width: 1139px;
-  height: 585px;
-}
-
 .bg_img {
   text-align: center;
   margin-top: 20px;
 }
 
-footer {
-  background-color:  #424242;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 40px;
-}
 
-header {
-  background-color: #424242;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 60px;
-  display: flex;
-}
-main {
-  width: 100%;
-  /* height: 500px; */
-  /* background-color: #00ffff; */
-}
 
-#ship {
-  /*fill: #FF0000;*/
+/* карта */
+#map_div {
+  margin-top: 150px;
+  width: 1139px;
+  height: 585px;
 }
 
 #track {
@@ -61,6 +72,10 @@ main {
   stroke-width: 4px;
 /*  width: 1500px;*/
 /*  stroke-dasharray: 2px 5px;*/
+}
+
+#ship {
+  /*fill: #FF0000;*/
 }
 
 .scroll {
@@ -80,14 +95,6 @@ rect {
   transition: 0.5s;
 }
 
-text {
-  text-anchor: middle;
-  font-family: Arial;
-  font-size: 12px;
-  user-select: none;
-  pointer-events: none;
-}
-
 .active circle {
   fill: #e53326;
   stroke: #e53326;
@@ -100,4 +107,16 @@ text {
 
 .active text {
   fill: #ffffff;
+}
+
+
+
+/* футер */
+footer {
+  background-color:  #424242;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
 }
