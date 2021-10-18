@@ -62,8 +62,8 @@ body {
 /* карта */
 #map_div {
   margin-top: 150px;
-  width: 1139px;
-  height: 585px;
+  min-width: 100%;
+  min-height: 100%;
 }
 
 #track {
