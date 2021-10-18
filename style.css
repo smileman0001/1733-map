@@ -2,13 +2,33 @@
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
 }
-
+html, body {
+  height: 100%;
+  line-height: 1;
+  font-size: 16px;
+  color: #000;
+  font-family: Roboto;
+}
+*,
+*::before
+*::after {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+}
+ul, ol, li {
+  list-style: none;
+}
+img {
+  vertical-align: top;
+}
 main {
   width: 100%;
-  /* height: 500px; */
-  /* background-color: #00ffff; */
 }
-
 text {
   text-anchor: middle;
   font-family: Arial;
@@ -16,7 +36,6 @@ text {
   user-select: none;
   pointer-events: none;
 }
-
 .wrapper {
   min-height: 100%;
   overflow: hidden;   /*убирает горизонтальный дефолтный скрол на сайте */
@@ -24,22 +43,38 @@ text {
 
 
 
+
+/* контейнер */
+._container {
+  max-width: 993px;
+  margin: 0px auto;
+}
+
+
 /* хедер */
 header {
-  background-color: #424242;
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 60px;
   display: flex;
 }
-
-.header_content_container {
-  max-width: 1023px;
+.header {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top 0;
+  z-index: 50;
 }
-
-
+.header__conteiner {
+  color: #2D2E2C;
+  display: flex;
+  min-height: 90px;
+  align-items: center;   /* выравнивает элементы по центру по высоте */
+}
+.logo_1733, .logo_map {
+  margin: 0;
+}
 
 /* боди */
 body {
@@ -51,12 +86,10 @@ body {
   background-attachment: fixed;
   background-size: cover;
 }
-
 .bg_img {
   text-align: center;
   margin-top: 20px;
 }
-
 
 
 /* карта */
@@ -65,7 +98,6 @@ body {
   width: 1139px;
   height: 585px;
 }
-
 #track {
   fill: none;
   stroke: #4974AD;
@@ -73,42 +105,34 @@ body {
 /*  width: 1500px;*/
 /*  stroke-dasharray: 2px 5px;*/
 }
-
 #ship {
   /*fill: #FF0000;*/
 }
-
 .scroll {
   width: 100%;
   transform: rotate(180deg);
 }
-
 circle {
   cursor: pointer;
   fill: #C1C1C1;
   stroke-width: 0;
   transition: 0.5s;
 }
-
 rect {
   fill: transparent;
   transition: 0.5s;
 }
-
 .active circle {
   fill: #e53326;
   stroke: #e53326;
   stroke-width: 3px;
 }
-
 .active rect {
   fill: #e53326;
 }
-
 .active text {
   fill: #ffffff;
 }
-
 
 
 /* футер */
