@@ -53,6 +53,8 @@ text {
 
 /* хедер */
 header {
+  background-color: #2D2E2C;
+  height: 90px;
   position: absolute;
   top: 0;
   left: 0;
