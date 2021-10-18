@@ -53,6 +53,8 @@ text {
 
 /* хедер */
 header {
+  background-color: #2D2E2C;
+  height: 90px;
   position: absolute;
   top: 0;
   left: 0;
@@ -67,7 +69,6 @@ header {
   z-index: 50;
 }
 .header__conteiner {
-  color: #2D2E2C;
   display: flex;
   min-height: 90px;
   align-items: center;   /* выравнивает элементы по центру по высоте */
