@@ -96,6 +96,7 @@
 
                 function render() {
                   let dp = target - pos;
+                  let day_name = "";
                   if(dp > 1 || dp < -1)
                     if(target < pos)
                       tt -=0.2;
@@ -104,13 +105,33 @@
                   if(tt == 1)
                   {
                     days +=1;
-                    document.getElementById("time").innerHTML = days + " дней";
+                    if(days % 10 == 1 && days % 100 != 11)
+                      day_name = " день";
+                    else if(days % 10 == 2 && days % 100 != 12)
+                      day_name = " дня";
+                    else if(days % 10 == 3 && days % 100 != 13)
+                      day_name = " дня";
+                    else if(days % 10 == 4 && days % 100 != 14)
+                      day_name = " дня";
+                    else
+                      day_name = " дней";
+                    document.getElementById("time").innerHTML = days + day_name;
                     tt = 0;
                   }
                   if(tt == -1)
                   {
                     days -=1;
-                    document.getElementById("time").innerHTML = days + " дней";
+                    if(days % 10 == 1 && days % 100 != 11)
+                      day_name = " день";
+                    else if(days % 10 == 2 && days % 100 != 12)
+                      day_name = " дня";
+                    else if(days % 10 == 3 && days % 100 != 13)
+                      day_name = " дня";
+                    else if(days % 10 == 4 && days % 100 != 14)
+                      day_name = " дня";
+                    else
+                      day_name = " дней";
+                    document.getElementById("time").innerHTML = days + day_name;
                     tt = 0;
                   }
                   // let position = 0;
@@ -130,7 +151,6 @@
                   // console.log(pos);
 
                 }
-
 
                 circles.forEach(c => c.onclick = e => {
                   //circles.forEach(c1 => c1.parentNode.classList.toggle('active', c===c1))
