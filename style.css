@@ -181,6 +181,9 @@ rect {
 .active text {
   fill: #ffffff;
 }
+.map_info {
+  padding-left: 900px;
+}
 
 /* футер */
 footer {
@@ -200,6 +203,7 @@ footer {
 }
 #hint {
   padding-top: 10px;
+  font-size: 12px;
 }
 #time {
   font-size: 36px;
