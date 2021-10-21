@@ -192,10 +192,15 @@ footer {
   height: 40px;
 }
 
-#time {
-  font-size: 36;
-  text-align: right;
+.hints {
+  text-align: left;
   font-weight: 500;
   padding-right: 80px;
   padding-top: 50px;
+}
+#hint {
+  padding-top: 10px;
+}
+#time {
+  font-size: 36px;
 }
