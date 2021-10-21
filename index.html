@@ -8,6 +8,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="modal.css">
+    <script src="modal.js"></script>
+
     <title>Map!</title>
     <!-- <script src="//code.jquery.com/jquery-1.11.0.min.js"></script> -->
   </head>
@@ -58,6 +62,14 @@
               <script src="https://atuin.ru/demo/ui-slider/jquery-ui.min.js"></script>
               <link rel="stylesheet" href="https://atuin.ru/demo/ui-slider/jquery-ui.css">
               <script type="text/javascript">
+                let modal = $modal({
+                  title: 'Название города',
+                  content: '<p>Содержимое окна...</p>',
+                  footerButtons: [
+                    { class: 'btn btn__cancel', text: 'Отмена', handler: 'modalHandlerCancel' },
+                    { class: 'btn btn__ok', text: 'ОК', handler: 'modalHandlerOk' }
+                  ]
+                });
                 let with_the_flow = true; //по течению или против
                 let days = 0;
                 let tt = 0;
@@ -65,7 +77,9 @@
                 len = track.getTotalLength(),
                 seg = len / (count+1),
                 pos = seg-1,
-                target = seg-1;
+                target = seg;
+                let relax = false;
+                let len_dict = new Map();
                 let cities = new Map();
                 cities.set(5, "Город 1");
                 cities.set(10, "Город 2");
@@ -85,11 +99,14 @@
                   let len = seg * (i), p = track.getPointAtLength(len);
                   if(cities.has(i))
                   {
+
                       return "<g transform=translate("+[p.x, p.y]+")>" +
-                         "  <circle data-len="+len+" r=4 id="+(i)+"></circle>" +
+                         "  <circle data-len="+len.toFixed(1)+" r=4 id="+(i)+"></circle>" +
                          //"  <rect rx=5 ry=5 x=-20 y=16 width=40 height=19></rect>" +
                          "  <text y=20>"+cities.get(i)+"</text>"+
+                         "  <ellipse id="+(i)+" cx=0 cy=-10 rx=10 ry=5 stroke=none fill=red stroke-width=2/>" +
                          "</g>";
+                         
                   }
                   else
                   {
@@ -102,10 +119,13 @@
                   //        "  <text y=30>"+(1+i)+"</text>"+
                   //        "</g>";
                 }).join('');
+                target = +document.querySelector('circle[id="'+5+'"]').getAttribute('data-len');
                 let circles = document.querySelectorAll('circle');
-                render();
+                let a = document.querySelectorAll('ellipse');
+                setTimeout(render, 1000);
 
                 function render() {
+                  let id = 5;
                   let dp = target - pos;
                   let day_name = "";
                   let direction = "";
@@ -133,6 +153,11 @@
                   } else {
                     direction = "Стоит на месте";
                     document.getElementById("hint").innerHTML = direction;
+
+                    if(document.querySelector('circle[data-len="'+pos+'"]') != null)
+                      id = document.querySelector('circle[data-len="'+pos+'"]').getAttribute('id');
+
+                    // document.querySelector('ellipse[id="'+id+'"]').setAttribute('rx', 10);
                   }
 
                   if(tt.toFixed(1) % 2 == 1 && with_the_flow === true)
@@ -200,6 +225,11 @@
                   target = +c.dataset.len;
                   document.getElementById('scroll').value = Number(c.getAttribute("id")) + 1;
                   console.log($('.scroll').val())
+                  // $("#slider").slider({'value': c.id});
+                });
+                a.forEach(c => c.onclick = e => {
+                  //circles.forEach(c1 => c1.parentNode.classList.toggle('active', c===c1))
+                  modal.show();
                   // $("#slider").slider({'value': c.id});
                 });
 

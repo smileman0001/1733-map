@@ -90,7 +90,7 @@ header {
   color: #9EBB84;
   font-size: 31px;
   font-family: "Roboto";
-  font-weight: 400;
+  font-weight: 500;
 }
 
 #pipka {
@@ -112,7 +112,7 @@ img {
 /* боди */
 body {
    /* Путь к фоновому изображению */
-   background-color: #C4C4C4;
+   background-color: #AAAAAA;
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
