@@ -130,11 +130,12 @@ body {
 /* карта */
 #map_div {
   background-image: url(карта/back.svg);
-  background-size: 105% 105%;
+  background-size: 105% 115%;
   background-color: #c3e2e2;
   margin-top: 150px;
   background-position: center;
-
+  border: 2px solid #2D2E2C;
+  height: 605px;
 }
 
 ._container3 {
@@ -159,7 +160,19 @@ body {
 .scroll {
   width: 100%;
   transform: rotate(180deg);
+  margin-top: -100px;
 }
+#side_river {
+  fill: none;
+  transform: scale(1.4);
+/*  -ms-transform: scale(1.5);
+  -webkit-transform: scale(1.5);*/
+}
+
+/*#side_river_wrapper:hover {
+  transform: scale(2.0);
+}*/
+
 circle {
   cursor: pointer;
   fill: #2D2E2C;
