@@ -130,11 +130,22 @@ body {
 /* карта */
 #map_div {
   background-image: url(карта/back.svg);
+  background-size: 105% 105%;
   background-color: #c3e2e2;
   margin-top: 150px;
   background-position: center;
 
 }
+
+._container3 {
+  /*height: 585px;*/
+}
+
+#side_river {
+  position: relative;
+  top: 800px; left: 250px;
+  }
+
 #track {
   fill: none;
   stroke: #4974AD;
