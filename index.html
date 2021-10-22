@@ -89,34 +89,21 @@
                 let relax = false;
                 let len_dict = new Map();
 
-                // function parse_cities (map, cities_str) {
-                //   let cities_arr = cities_str.split(";");
-                //   for (i = 0; i < cities_arr.length; i ++) {
-                //     s = cities_arr[i];
-                //     city_info = s.split(", ");
-                //     num = city_info[0];
-                //     name = city_info[1];
-                //     map.set(num, name);
-                //   }
-                // }
+                function parse_cities (map, cities_str) {
+                  let cities_arr = cities_str.split(";");
+                  for (i = 0; i < cities_arr.length; i ++) {
+                    s = cities_arr[i];
+                    city_info = s.split(", ");
+                    num = Number(city_info[0]);
+                    name = city_info[1];
+                    map.set(num, name);
+                  }
+                  return map;
+                }
 
+                var str_cities = '5, "Город 1";10, "Город 2";15, "Город 3";20, "Город 4";30, "Город 5";40, "Город 6";45, "Город 7";100, "Город 8";200, "Город 9";300, "Город 10";350, "Город 11";400, "Город 12";405, "Город 13";499, "Город 14"'
                 let cities = new Map();
-                // var str_cities  = '5, "Город 1";10, "Город 2";15, "Город 3";20, "Город 4";30, "Город 5";40, "Город 6";45, "Город 7";100, "Город 8";200, "Город 9";300, "Город 10";350, "Город 11";400, "Город 12";405, "Город 13";499, "Город 14"'
-                // parse_cities(cities, str_cities);
-                cities.set(5, "Город 1");
-                cities.set(10, "Город 2");
-                cities.set(15, "Город 3");
-                cities.set(20, "Город 4");
-                cities.set(30, "Город 5");
-                cities.set(40, "Город 6");
-                cities.set(45, "Город 7");
-                cities.set(100, "Город 8");
-                cities.set(200, "Город 9");
-                cities.set(300, "Город 10");
-                cities.set(350, "Город 11");
-                cities.set(400, "Город 12");
-                cities.set(405, "Город 13");
-                cities.set(499, "Город 14");
+                cities = parse_cities(cities, str_cities);
 
                 svg.innerHTML += Array(count).fill(0).map((e, i) => {
                   let len = seg * (i), p = track.getPointAtLength(len);
