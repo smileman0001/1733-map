@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -64,7 +65,6 @@
               <script src="https://atuin.ru/demo/ui-slider/jquery-ui.min.js"></script>
 
               <link rel="stylesheet" href="https://atuin.ru/demo/ui-slider/jquery-ui.css">
-
               <div id="slider"></div>
               <input class="scroll" id = "scroll" type="range" min="0" max="500" step="1" value="0">
 
@@ -127,9 +127,7 @@
                            "  <text y=20>"+cities.get(i)+"</text>"+
                            "  <ellipse id="+(i)+" cx=0 cy=-10 rx=10 ry=5 stroke=none fill=red stroke-width=2/>" +
                            "</g>";
-                  }
-                  else return "<g></g>"
-
+                  } else return "<g></g>"
                   // return "<g transform=translate("+[p.x, p.y]+") class"+(i?'':'=active')+">" +
                   // return "<g transform=translate("+[p.x, p.y]+")>" +
                   //        "  <circle data-len="+len+" r=6 id="+(i)+"></circle>" +
@@ -137,12 +135,13 @@
                   //        "  <text y=30>"+(1+i)+"</text>"+
                   //        "</g>";
                 }).join('');
+
                 target = +document.querySelector('circle[id="'+5+'"]').getAttribute('data-len');
                 let circles = document.querySelectorAll('circle');
                 let a = document.querySelectorAll('ellipse');
                 setTimeout(render, 1000);
 
-                function print_hint (days, dir) {
+                function print_hint (days, direction) {
                   if(days % 10 == 1 && days % 100 != 11)
                     word_day = " день";
                   else if(days % 10 == 2 && days % 100 != 12)
@@ -155,7 +154,7 @@
                     word_day =  " дней";
 
                   document.getElementById("time").innerHTML = days + word_day;
-                  document.getElementById("hint").innerHTML = dir;
+                  document.getElementById("hint").innerHTML = direction;
                 }
 
                 function render() {
@@ -167,11 +166,12 @@
                   let first = document.querySelector('circle[id="'+100+'"]');
                   let second = document.querySelector('circle[id="'+200+'"]');
 
-                  if (pos > +first.getAttribute('data-len') && pos < +second.getAttribute('data-len'))
+                  if (pos > +first.getAttribute('data-len') && pos < +second.getAttribute('data-len')) {
                     with_the_flow = false;
-                  else with_the_flow = true;
+                  } else
+                    with_the_flow = true;
 
-                  if(with_the_flow === true) {
+                  if (with_the_flow === true) {
                     direction = "Плывет по течению";
                     change = 2;
                   } else {
@@ -179,8 +179,8 @@
                     change = 1;
                   }
 
-                  if(dp > 1 || dp < -1) {
-                    if(target < pos)
+                  if (dp > 1 || dp < -1) {
+                    if (target < pos)
                       tt -= change;
                     else
                       tt  += change;
@@ -194,26 +194,22 @@
                     // document.querySelector('ellipse[id="'+id+'"]').setAttribute('rx', 10);
                   }
 
-                  if(tt.toFixed(1) % 2 == 1 && with_the_flow === true)
+                  if((tt % 2 == 1 || tt % 2 == -1) && with_the_flow === true)
                     tt = 0;
 
-                  if(tt.toFixed(1) % 2 == -1 && with_the_flow === true)
-                    tt = 0;
-
-                  if(tt.toFixed(1) == 10)
+                  if(tt == 10)
                   {
-                    tt = 0;
                     days +=1;
                     print_hint(days, direction)
                     tt = 0;
                   }
-                  if(tt.toFixed(1) == -10)
+                  if(tt == -10)
                   {
-                    tt = 0;
                     days -=1;
                     print_hint(days, direction)
                     tt = 0;
                   }
+
                   // let position = 0;
                   // circles.forEach(c => {
                   //   if (c.dataset.len == pos)
@@ -225,11 +221,8 @@
                       a = Math.atan2(p2.y - p1.y, p2.x - p1.x) * 180 / Math.PI;
                   ship.setAttribute("transform", "translate("+p1.x+","+p1.y+")rotate("+a+")");
                   // document.getElementById('scroll').value = position;
-                  // console.log($('.scroll').val())
-                  requestAnimationFrame(render);
-                  // console.log(target);
-                  // console.log(pos);
 
+                  requestAnimationFrame(render);
                 }
 
                 circles.forEach(c => c.onclick = e => {
