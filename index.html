@@ -69,6 +69,7 @@
               <input class="scroll" id = "scroll" type="range" min="0" max="500" step="1" value="0">
 
               <script type="text/javascript">
+
                 let modal = $modal({
                   title: 'Название города',
                   content: '<p>Содержимое окна...</p>',
@@ -78,7 +79,13 @@
                   ]
                 });
 
+
+                let cities_id = new Map();
+                let numb = 0;
                 let with_the_flow = true; //по течению или против
+                let stands_still = true;
+                let id = 0;
+                let prev_id = 0;
                 let days = 0;
                 let tt = 0;
                 let count = 500,
@@ -88,6 +95,7 @@
                 target = seg;
                 let relax = false;
                 let len_dict = new Map();
+
 
                 function parse_cities (map, cities_str) {
                   let cities_arr = cities_str.split("|");
@@ -100,32 +108,32 @@
                   return map;
                 }
 
+
                 var str_cities = '5, Город 1|10, Город 2|15, Город 3|20, Город 4|30, Город 5|40, Город 6|45, Город 7|100, Город 8|200, Город 9|300, Город 10|350, Город 11|400, Город 12|405, Город 13|499, Город 14'
                 let cities = new Map();
                 cities = parse_cities(cities, str_cities);
 
+
                 svg.innerHTML += Array(count).fill(0).map((e, i) => {
                   let len = seg * (i), p = track.getPointAtLength(len);
                   if(cities.has(i)) {
+                    numb +=1;
+                    cities_id.set(numb, i);
                     return "<g transform=translate("+[p.x, p.y]+")>" +
                            "  <circle data-len="+len.toFixed(1)+" r=4 id="+(i)+"></circle>" +
                            //"  <rect rx=5 ry=5 x=-20 y=16 width=40 height=19></rect>" +
                            "  <text y=20>"+cities.get(i)+"</text>"+
-                           "  <ellipse id="+(i)+" cx=0 cy=-10 rx=10 ry=5 stroke=none fill=red stroke-width=2/>" +
+                           "  <ellipse id="+(i)+" cx=0 cy=-10 rx=0 ry=5 stroke=none fill=red stroke-width=2/>" +
                            "</g>";
                   } else return "<g></g>"
-                  // return "<g transform=translate("+[p.x, p.y]+") class"+(i?'':'=active')+">" +
-                  // return "<g transform=translate("+[p.x, p.y]+")>" +
-                  //        "  <circle data-len="+len+" r=6 id="+(i)+"></circle>" +
-                  //        "  <rect rx=5 ry=5 x=-20 y=16 width=40 height=19></rect>" +
-                  //        "  <text y=30>"+(1+i)+"</text>"+
-                  //        "</g>";
                 }).join('');
+
 
                 target = +document.querySelector('circle[id="'+5+'"]').getAttribute('data-len');
                 let circles = document.querySelectorAll('circle');
                 let a = document.querySelectorAll('ellipse');
                 setTimeout(render, 1000);
+
 
                 function print_hint (days, direction) {
                   if(days % 10 == 1 && days % 100 != 11)
@@ -143,8 +151,8 @@
                   document.getElementById("hint").innerHTML = direction;
                 }
 
+
                 function render() {
-                  let id = 5;
                   let dp = target - pos;
                   let day_name = "";
                   let direction = "";
@@ -164,19 +172,49 @@
                     change = 1;
                   }
 
-                  if(dp > 1 || dp < -1) {
-                    if(target < pos)
-                      tt -= change;
-                    else
-                      tt  += change;
+                  if((dp > 1 || dp < -1)) {
+                    if(id > 0){
+                      if(target < pos)
+                        tt -= change;
+                      else
+                        tt  += change;
+                    }
+
+                    stands_still = false;
+                    prev_id = id;
+                    if (cities_id.has(id)) {
+                        document.querySelector('ellipse[id="'+cities_id.get(id)+'"]').setAttribute('rx', 0);
+                      }
+                    document.querySelector('ellipse[id="'+cities_id.get(1)+'"]').setAttribute('rx', 0);
                   }
                   else {
+                    direction = "Стоит на месте";
                     document.getElementById("hint").innerHTML = "Стоит на месте";
 
-                    if(document.querySelector('circle[data-len="'+pos+'"]') != null) {
-                      id = document.querySelector('circle[data-len="'+pos+'"]').getAttribute('id');
+                    if(stands_still === false)
+                    {
+                      id +=1;
+                      if(id == 1){
+                        days = 0;
+                        tt = 0;
+                        print_hint(days, direction)
+                      }
+                      stands_still = true;
+                      if (cities_id.has(id)) {
+                        document.querySelector('ellipse[id="'+cities_id.get(id)+'"]').setAttribute('rx', 10);
+                      }
                     }
-                    // document.querySelector('ellipse[id="'+id+'"]').setAttribute('rx', 10);
+                    else
+                    {
+                      if(id == 1){
+                        days = 0;
+                        tt = 0;
+                        print_hint(days, direction)
+                      }
+                      if (cities_id.has(id)) {
+                        document.querySelector('ellipse[id="'+cities_id.get(id)+'"]').setAttribute('rx', 10);
+                      }
+                    }
                   }
 
                   if((tt % 2 == 1 || tt % 2 == -1) && with_the_flow === true)
@@ -188,6 +226,7 @@
                     print_hint(days, direction)
                     tt = 0;
                   }
+
                   if(tt == -10)
                   {
                     days -=1;
@@ -195,60 +234,61 @@
                     tt = 0;
                   }
 
-                  // let position = 0;
-                  // circles.forEach(c => {
-                  //   if (c.dataset.len == pos)
-                  //     position = Number(c.getAttribute("id")) + 1;
-                  // });
                   pos += Math.abs(dp) < 1 ? 0 : Math.sign(dp);
                   let p1 = track.getPointAtLength(pos),
                       p2 = track.getPointAtLength(pos + 1),
                       a = Math.atan2(p2.y - p1.y, p2.x - p1.x) * 180 / Math.PI;
                   ship.setAttribute("transform", "translate("+p1.x+","+p1.y+")rotate("+a+")");
-                  // document.getElementById('scroll').value = position;
-
                   requestAnimationFrame(render);
                 }
 
                 circles.forEach(c => c.onclick = e => {
-                  //circles.forEach(c1 => c1.parentNode.classList.toggle('active', c===c1))
                   target = +c.dataset.len;
+                  if (cities_id.has(id)) {
+                    document.querySelector('ellipse[id="'+cities_id.get(id)+'"]').setAttribute('rx', 0);
+                  }
+                  id = getKey(c.getAttribute('id')) - 1;
                   document.getElementById('scroll').value = Number(c.getAttribute("id")) + 1;
                   console.log($('.scroll').val())
-                  // $("#slider").slider({'value': c.id});
-                });
-                a.forEach(c => c.onclick = e => {
-                  //circles.forEach(c1 => c1.parentNode.classList.toggle('active', c===c1))
-                  modal.show();
-                  // $("#slider").slider({'value': c.id});
                 });
 
+
+                a.forEach(c => c.onclick = e => {
+                  modal.show();
+                });
+
+
                 document.getElementById("side_river_wrapper").onclick = e => {
-                  alert(123);
+                  let modal_Moscow = $modal({
+                    title: 'Путь до Москвы',
+                    content: '<p>Содержимое окна...</p>',
+                    // footerButtons: [
+                    //   { class: 'btn btn__cancel', text: 'Отмена', handler: 'modalHandlerCancel' },
+                    //   { class: 'btn btn__ok', text: 'ОК', handler: 'modalHandlerOk' }
+                    // ]
+                  });
+                  modal_Moscow.show();
                 };
                 $('.side_river_wrapper').hover(function() {$( '.side_river' ).css("strokeWidth", 6);},
                   function() {$( '.side_river' ).css("strokeWidth", 3);});
 
-                // jQuery(document).ready(function($) {
-                //   $('input').change(function() {
-                //     target = +circles.item($(this).val() - 1).dataset.len;
-                //     console.log('Change: ' + $(this).val())
-                //   });
-                // });
+
+                function getKey(value) {
+                  return [...cities_id].find(([key, val]) => val == value)[0]
+                }
+
 
                 let value = $('.scroll').prev().attr('value');
                 $('.scroll').html(value);
                 $('.scroll').on('input',function(){
                   let qs = document.querySelector('circle[id="'+($('.scroll').val() - 1)+'"]');
-                  if (qs != null)
+                  if (qs != null){
                     target = +qs.getAttribute('data-len');
-                  // circles.forEach(c => {
-                  //   if(c.getAttribute("id") === $('.scroll').val() - 1)
-                  //     target = +c.dataset.len;
-                  // })
-                  // target = +circles.item($('.scroll').val() - 1).dataset.len;
-                  //circles.item($('.scroll').val() - 1).parentNode.classList.toggle('active');
-                  // console.log( $('.scroll').val())
+                    if (cities_id.has(id)) {
+                      document.querySelector('ellipse[id="'+cities_id.get(id)+'"]').setAttribute('rx', 0);
+                    }
+                    id = getKey(qs.getAttribute('id')) - 1;
+                  }
                 })
             </script>
           </div>
