@@ -193,6 +193,9 @@
 
                     if(stands_still === false)
                     {
+                      if(id == 0.1){
+                        id = 0;
+                      }
                       id +=1;
                       if(id == 1){
                         days = 0;
@@ -249,6 +252,9 @@
                   }
                   id = getKey(c.getAttribute('id')) - 1;
                   document.getElementById('scroll').value = Number(c.getAttribute("id")) + 1;
+                  if (id == 0){
+                    id = 0.1;
+                  }
                   console.log($('.scroll').val())
                 });
 
