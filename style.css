@@ -49,7 +49,7 @@ text {
   margin: 0px auto;
 }
 ._container2 {
-  width: 1139px;
+  width: 1250px;
   margin: 0px auto;
 }
 
@@ -131,12 +131,12 @@ body {
 /* карта */
 #map_div {
   background-image: url(карта/back.svg);
-  background-size: 105% 115%;
+  background-size: 110% 125%;
   background-color: #c3e2e2;
   margin-top: 100px;
   background-position: center;
   border: 2px solid #2D2E2C;
-  height: 605px;
+  height: 680px;
 }
 
 ._container3 {
@@ -197,7 +197,7 @@ rect {
   fill: #ffffff;
 }
 .map_info {
-  padding-left: 900px;
+  padding-left: 1050px;
 }
 
 /* футер */
@@ -213,12 +213,12 @@ footer {
 .hints {
   text-align: left;
   font-weight: 500;
-  padding-right: 80px;
+  padding-right: 30px;
   padding-top: 50px;
 }
 #hint {
   padding-top: 10px;
-  font-size: 12px;
+  font-size: 14px;
 }
 #time {
   font-size: 36px;
