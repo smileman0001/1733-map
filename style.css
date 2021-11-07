@@ -56,7 +56,7 @@ text {
 /* хедер */
 header {
   background-color: #2D2E2C;
-  height: 90px;
+  height: 63px;
   position: absolute;
   top: 0;
   left: 0;
@@ -73,16 +73,21 @@ header {
 .header__conteiner {
   left: 0;
   display: flex;
-  min-height: 90px;
+  min-height: 63px;
   align-items: center;   /* выравнивает элементы по центру по высоте */
+  justify-content: center;
+}
+
+.header__logo {
+  align-items: center;
 }
 
 .logo_1733 {
-  margin-top: 25px;
-  font-size: 24px;
+  margin-right: 25px;
+  font-size: 18px;
   color: white;
   font-family: "Roboto";
-  font-weight: bold;
+  font-weight: normal;
 }
 .logo_map {
   margin-top: 2px;
