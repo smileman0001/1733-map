@@ -70,17 +70,10 @@
 
               <script type="text/javascript">
 
-                let modal = $modal({
-                  title: 'Название города',
-                  content: '<p>Содержимое окна...</p>',
-                  footerButtons: [
-                    { class: 'btn btn__cancel', text: 'Отмена', handler: 'modalHandlerCancel' },
-                    { class: 'btn btn__ok', text: 'ОК', handler: 'modalHandlerOk' }
-                  ]
-                });
-
 
                 let cities_id = new Map();
+                let cities_Id_desc = new Map();
+                let cities_name = new Map();
                 let numb = 0;
                 let with_the_flow = true; //по течению или против
                 let stands_still = true;
@@ -108,7 +101,7 @@
                   return map;
                 }
 
-                var str_cities = '5, Город 1, История связанная с этим городом|10, Город 2, История связанная с этим городом|15, Город 3, История связанная с этим городом|20, Город 4, История связанная с этим городом|30, Город 5, История связанная с этим городом|40, Город 6, История связанная с этим городом|45, Город 7, История связанная с этим городом|100, Город 8, История связанная с этим городом|200, Город 9, История связанная с этим городом|300, Город 10, История связанная с этим городом|350, Город 11, История связанная с этим городом|400, Город 12, История связанная с этим городом|405, Город 13, История связанная с этим городом|499, Город 14, История связанная с этим городом'
+                var str_cities = '5, Город 1, История 1|10, Город 2, История 2|15, Город 3, История 3|20, Город 4, История 4|30, Город 5, История 5|40, Город 6, История 6|45, Город 7, История 7|100, Город 8, История 8|200, Город 9, История 9|300, Город 10, История 10|350, Город 11, История 11|400, Город 12, История 12|405, Город 13, История 13|499, Город 14, История 14'
 
                 let cities = new Map();
                 let cities_description = new Map();
@@ -121,6 +114,8 @@
                   if(cities.has(i)) {
                     numb +=1;
                     cities_id.set(numb, i);
+                    cities_Id_desc.set(numb, cities_description.get(i));
+                    cities_name.set(numb, cities.get(i));
                     return "<g transform=translate("+[p.x, p.y]+")>" +
                            "  <circle data-len="+len.toFixed(1)+" r=4 id="+(i)+"></circle>" +
                            //"  <rect rx=5 ry=5 x=-20 y=16 width=40 height=19></rect>" +
@@ -130,6 +125,7 @@
                   } else return "<g></g>"
                 }).join('');
 
+                
 
                 target = +document.querySelector('circle[id="'+5+'"]').getAttribute('data-len');
                 let circles = document.querySelectorAll('circle');
@@ -264,7 +260,16 @@
 
 
                 a.forEach(c => c.onclick = e => {
-                  modal.show();
+                  let i = getKey(c.getAttribute('id'));
+                  let modal_City = $modal({
+                    title: cities_name.get(i),
+                    content: cities_Id_desc.get(i),
+                    // footerButtons: [
+                    //   { class: 'btn btn__cancel', text: 'Отмена', handler: 'modalHandlerCancel' },
+                    //   { class: 'btn btn__ok', text: 'ОК', handler: 'modalHandlerOk' }
+                    // ]
+                  });
+                  modal_City.show();
                 });
 
 
