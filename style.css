@@ -84,12 +84,26 @@ header {
 }
 
 .logo_1733 {
-  margin-right: 25px;
+  border: 1px solid #2D2E2C;
+  background-color: #2D2E2C;
+  padding: 5px 13px 9px;
   font-size: 18px;
   color: #F0F0F0;
   font-family: "Roboto";
   font-weight: normal;
 }
+
+.logo_1733:hover {
+  padding: 5px 13px 9px;
+  border: 1px solid #40423F;
+  border-radius: 3px;
+  background-color: #40423F;
+}
+
+.logo_map:hover {
+  color: #F0F0F0;
+}
+
 .logo_map {
   color: #B6DD95;
 }
