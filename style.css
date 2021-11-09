@@ -248,7 +248,11 @@ footer {
 /*.slidecontainer {
     width: 100%;
 }*/
-
+.pipka {
+  fill: #E8E1C1;
+  stroke: #2D2E2C;
+  stroke-width: 2px;
+}
 .scroll {
     -webkit-appearance: none;
     width: 100%;
