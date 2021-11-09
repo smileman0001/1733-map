@@ -8,6 +8,7 @@ html, body {
   font-size: 16px;
   color: #000;
   font-family: Roboto;
+  overflow:  hidden;
 }
 *,
 *::before
@@ -35,7 +36,7 @@ text {
   pointer-events: none;
 }
 .wrapper {
-  min-height: 100%;
+  min-height: 95%;
   overflow: hidden;   /*убирает горизонтальный дефолтный скрол на сайте */
 }
 
@@ -48,7 +49,7 @@ text {
   margin: 0px auto;
 }
 ._container2 {
-  width: 1139px;
+  width: 1250px;
   margin: 0px auto;
 }
 
@@ -56,7 +57,7 @@ text {
 /* хедер */
 header {
   background-color: #2D2E2C;
-  height: 90px;
+  height: 63px;
   position: absolute;
   top: 0;
   left: 0;
@@ -73,24 +74,38 @@ header {
 .header__conteiner {
   left: 0;
   display: flex;
-  min-height: 90px;
+  min-height: 63px;
   align-items: center;   /* выравнивает элементы по центру по высоте */
+  justify-content: center;
+}
+
+.header__logo {
+  align-items: center;
 }
 
 .logo_1733 {
-  margin-top: 25px;
-  font-size: 24px;
-  color: white;
+  border: 1px solid #2D2E2C;
+  background-color: #2D2E2C;
+  padding: 5px 13px 9px;
+  font-size: 18px;
+  color: #F0F0F0;
   font-family: "Roboto";
-  font-weight: bold;
+  font-weight: normal;
 }
+
+.logo_1733:hover {
+  padding: 5px 13px 9px;
+  border: 1px solid #40423F;
+  border-radius: 3px;
+  background-color: #40423F;
+}
+
+.logo_map:hover {
+  color: #F0F0F0;
+}
+
 .logo_map {
-  margin-top: 2px;
-  margin-left: -5px;
-  color: #9EBB84;
-  font-size: 31px;
-  font-family: "Roboto";
-  font-weight: 500;
+  color: #B6DD95;
 }
 
 #pipka {
@@ -130,12 +145,12 @@ body {
 /* карта */
 #map_div {
   background-image: url(карта/back.svg);
-  background-size: 105% 115%;
+  background-size: 110% 125%;
   background-color: #c3e2e2;
-  margin-top: 150px;
+  margin-top: 100px;
   background-position: center;
   border: 2px solid #2D2E2C;
-  height: 605px;
+  height: 680px;
 }
 
 ._container3 {
@@ -160,7 +175,8 @@ body {
 .scroll {
   width: 100%;
   transform: rotate(180deg);
-  margin-top: -100px;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 #side_river {
   fill: none;
@@ -195,7 +211,7 @@ rect {
   fill: #ffffff;
 }
 .map_info {
-  padding-left: 900px;
+  padding-left: 1050px;
 }
 
 /* футер */
@@ -211,12 +227,12 @@ footer {
 .hints {
   text-align: left;
   font-weight: 500;
-  padding-right: 80px;
+  padding-right: 30px;
   padding-top: 50px;
 }
 #hint {
   padding-top: 10px;
-  font-size: 12px;
+  font-size: 14px;
 }
 #time {
   font-size: 36px;
