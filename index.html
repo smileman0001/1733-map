@@ -306,8 +306,13 @@
                   });
                   modal_Moscow.show();
                 };
-                $('.side_river_wrapper').hover(function() {$( '.side_river' ).css("strokeWidth", 6);},
-                  function() {$( '.side_river' ).css("strokeWidth", 3);});
+
+                $('.side_river_wrapper').hover(function() {
+                  $( '.side_river' ).animate({strokeWidth: 6}, 150 );
+                },
+                  function() {
+                    $( '.side_river' ).animate({strokeWidth: 3}, 150 );
+                  });
 
 
                 function getKey(value) {
