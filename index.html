@@ -142,7 +142,8 @@
                            "  <circle data-len="+len.toFixed(1)+" r=4 id="+(i)+"></circle>" +
                            //"  <rect rx=5 ry=5 x=-20 y=16 width=40 height=19></rect>" +
                            "  <text y=20>"+cities.get(i)+"</text>"+
-                           "  <ellipse id="+(i)+" cx=0 cy=-10 rx=0 ry=5 stroke=none fill=red stroke-width=2/>" +
+                           "  <ellipse id="+(i)+" cx=0 cy=-10 rx=0 ry=5 stroke=none/>" +
+                           // "  <div id="+(i)+" class=ellipse></div>" +
                            "</g>";
                   } else return "<g></g>"
                 }).join('');
