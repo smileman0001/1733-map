@@ -198,8 +198,10 @@ body {
 
 circle {
   cursor: pointer;
-  fill: #2D2E2C;
-  stroke-width: 0;
+  fill: #E8E1C1;
+  stroke: #2D2E2C;
+  /*border: 1px solid #2D2E2C;*/
+  stroke-width: 2px;
   transition: 0.5s;
 }
 rect {
