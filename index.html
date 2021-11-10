@@ -274,7 +274,9 @@
                   requestAnimationFrame(render);
                 }
 
+
                 circles.forEach(c => c.onclick = e => {
+                  c.style.fill = "#2D2E2C";
                   target = +c.dataset.len;
                   if (cities_id.has(id)) {
                     document.querySelector('ellipse[id="'+cities_id.get(id)+'"]').setAttribute('rx', 0);
@@ -284,6 +286,9 @@
                   if (id == 0){
                     id = 0.1;
                   }
+                  setTimeout(function() {
+                        c.style.fill = "#E8E1C1"
+                    }, 300)
                 });
                 var timeout;
                 circles.forEach(c => {
