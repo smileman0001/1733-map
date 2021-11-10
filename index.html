@@ -154,24 +154,6 @@
                   } else return "<g></g>"
                 }).join('');
 
-                // svg.innerHTML += Array(count).fill(0).map((e, i) => {
-                //   let len = seg * (i), p = track.getPointAtLength(len);
-                //   if(cities.has(i)) {
-                //     pipka_width -= 10;
-                    
-                //     return "<g transform=translate("+[p.x, p.y]+")>" +
-                //            "  <circle data-len="+len.toFixed(1)+" r=4 id="+(i)+"></circle>" +
-                //            //"  <rect rx=5 ry=5 x=-20 y=16 width=40 height=19></rect>" +
-                //            "  <text y=20>"+cities.get(i)+"</text>"+
-                //            "  <ellipse id="+(i)+" cx=0 cy=-10 rx=0 ry=5 stroke=none/>" +
-                //            // "  <div id="+(i)+" class=ellipse></div>" +
-                //            "</g>"
-                //            "<g transform=translate("+pipka_width+",658)>" +
-                //            "<path d=M2.92427 8.44004C3.07881 8.78092 3.41847 8.99988 3.79275 8.99988C4.15393 8.99988 4.48411 8.79581 4.64563 8.47276L6.36588 5.03223C7.29217 3.17962 5.94501 0.999878 3.87373 0.999878C1.8485 0.999878 0.499827 3.09207 1.33603 4.93661L2.92427 8.44004Z fill=#E8E1C1 stroke=#2D2E2C stroke-width=2/>" +
-                //            "</g>";
-                //   } else return "<g></g>"
-                // }).join('');
-
 
                 target = +document.querySelector('circle[id="'+5+'"]').getAttribute('data-len');
                 let circles = document.querySelectorAll('circle');
@@ -303,7 +285,19 @@
                     id = 0.1;
                   }
                 });
-
+                var timeout;
+                circles.forEach(c => {
+                  c.onmouseover = function(e) {
+                    timeout = setTimeout(function() {
+                        c.setAttribute('r', 6)
+                    }, 80)
+                  };
+                  c.onmouseout = function(e) {
+                      timeout = setTimeout(function() {
+                        c.setAttribute('r', 4)
+                    }, 80)
+                  };
+                });
 
                 a.forEach(c => c.onclick = e => {
                   let i = getKey(c.getAttribute('id'));
