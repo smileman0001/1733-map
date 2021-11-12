@@ -208,8 +208,8 @@
                       // id +=1;
                       if(id == 1){
                         days = 0;
+                        print_hint(days, direction);
                         tt = 0;
-                        print_hint(days, direction)
                       }
                       stands_still = true;
                       set_attribute_if_citie_has_correct_id (id, 10);
@@ -218,8 +218,8 @@
                     {
                       if(id == 1){
                         days = 0;
+                        print_hint(days, direction);
                         tt = 0;
-                        print_hint(days, direction)
                       }
                       set_attribute_if_citie_has_correct_id (id, 10);
                     }
@@ -231,14 +231,14 @@
                   if(tt == 10)
                   {
                     days +=1;
-                    print_hint(days, direction)
+                    print_hint(days, direction);
                     tt = 0;
                   }
 
                   if(tt == -10)
                   {
                     days -=1;
-                    print_hint(days, direction)
+                    print_hint(days, direction);
                     tt = 0;
                   }
 
@@ -252,10 +252,6 @@
 
 
                 //scroll (range) sript
-                function getKey(value) {
-                  return [...cities_id].find(([key, val]) => val == value)[0]
-                }
-
                 let value = $('.scroll').prev().attr('value');
                 $('.scroll').html(value);
                 $('.scroll').on('input',function(){
@@ -357,6 +353,9 @@
                   }
                 }
 
+                function getKey(value) {
+                  return [...cities_id].find(([key, val]) => val == value)[0]
+                }
             </script>
           </div>
         </div>
