@@ -56,6 +56,10 @@
           <div class= "12345 _container3">
             <div id = "map_div">
               <div class = "map_info">
+                <!-- small texture left side hints (when boat comeback) -->
+                <!-- <svg width=24 height=28 transform="translate(-100,100)">
+                  <path id="time" d="M23 20C-1.83118 40.5 -7.49997 -8 21.8312 9.42096M21.8312 9.42096L21 0.5M21.8312 9.42096L14.8911 12.1127" fill="none" stroke="black" stroke-width="4" opacity="1"/>
+                </svg> -->
                 <div id = "time" class = "hints">
                     0 дней
                 </div>
@@ -265,7 +269,7 @@
 
 
                 //alert scripts
-                function show_alert (title_str, content_str) {
+                function showAlert (title_str, content_str) {
                   let alert = $modal({
                     title: title_str,
                     content: content_str,
@@ -279,11 +283,11 @@
 
                 a.forEach(c => c.onclick = e => {
                   let id = getKey(c.getAttribute('id'));
-                  show_alert(cities_name.get(id), cities_Id_desc.get(id));
+                  showAlert(cities_name.get(id), cities_Id_desc.get(id));
                 });
 
                 document.getElementById("side_river_wrapper").onclick = e => {
-                  show_alert ("Путь до Москвы", '<p>Содержимое окна...</p>')
+                  showAlert ("Путь до Москвы", '<p>Содержимое окна...</p>')
                 };
 
 
@@ -315,6 +319,7 @@
                     id = 0.1;
                   }
                 });
+
                 var timeout;
                 circles.forEach(c => {
                   c.onmouseover = function(e) {
