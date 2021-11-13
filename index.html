@@ -99,77 +99,107 @@
                 let numb = 0;
                 let city_id = 0;
                 let numeric = 0;
+                let numeric2 = 0;
                 let id = 0;
                 let prev_id = 0;
                 let days = 0;
                 let tt = 0;
                 let pipka_x_pos = 0;
+                let text_x_pos = 0;
+                let text_y_pos = 0;
+
 
                 let with_the_flow = true; //по течению или против
                 let stands_still = true;
                 let relax = false;
 
                 let cities_id = new Map();
-                let cities_Id_desc = new Map();
-                let cities_name = new Map();
-                let len_dict = new Map();
+                let text_x_and_y = new Array();
 
-                var cities_info = '5, Екатеринбург, История про Екатеринбург|10, Горохово плотбище, История про Горохово плотбище|15, Макаровская пристань, История про Макаровская пристань|20, Уткинская пристань, История про Уткинская пристань|25, Каменская пильная мельница, История про Каменская пильная мельница|30, Курьинская пристань, История про Курьинская пристань|35, Илимская пристань, История про Илимская пристань|40, Сулемская пристань, История про Сулемская пристань|50, Ослянская пристань, История про Ослянская пристань|60, Камасино, История про Камасино|70, Чусовские городки, История про Чусовские городки|81, Васильев луг, История про Васильев луг|88, Ерошиха, История про Ерошиха|121, Оса, История про Оса|158, Сарапул, История про Сарапул|175, Елабуга, История про Елабуга|205, Свиные горы, История про Свиные горы|230, Рыбная слобода, История про Рыбная слобода|240, Лаишево, История про Лаишево|257, Казань, История про Казань|260, Верхний Услон, История про Верхний Услон|290, Чебоксары, История про Чебоксары|298, Козьмодемьянск, История про Козьмодемьянск|320, Макарьевская ярмарка, История про Макарьевская ярмарка|335, Нижний Новгород, История про Нижний Новгород|340, Балахна, История про Балахна|400, Кострома, История про Кострома|415, Ярославль, История про Ярославль|430, Рыбная Слобода, История про Рыбная Слобода|440, Молога, История про Молога|450, Мышкино, История про Мышкино|460, Углич, История про Углич|470, Калязин, История про Калязин|510, Тверь, История про Тверь|518, Торжок, История про Торжок|540, Вышний Волочёк, История про Вышний Волочёк|580, Опеченская пристань, История про Опеченская пристань|585, Боровичи, История про Боровичи|595, Потерпельская пристань, История про Потерпельская пристань|610, Великий Новгород, История про Великий Новгород|665, Новая Лагода, История про Новая Лагода|680, Шлиссельбург, История про Шлиссельбург|699, Санкт-Петербург, История про Санкт-Петербург'
+                var cities_info = '5, Екатеринбург, справа!-40, История про Екатеринбург|10, Горохово плотбище, слева!-10, История про Горохово плотбище|15, Макаровская пристань, снизу!-20, История про Макаровская пристань|88, Ерошиха, сверху!10, История про Ерошиха|121, Оса, справа!10, История про Оса|595, Потерпельская пристань, справа!10, История про Потерпельская пристань|610, Великий Новгород, справа!10, История про Великий Новгород|665, Новая Лагода, справа!10, История про Новая Лагода|699, Санкт-Петербург, справа!10, История про Санкт-Петербург'
 
-                // parsing info about cities sript
-                function parse_cities (map, cities_str, id) {
+                function parse_cities2 (map, cities_str, one_or_else) {
                   let cities_arr = cities_str.split("|");
-                  for (i = 0; i < cities_arr.length; i ++) {
-                    city_info = cities_arr[i].split(", ");
-                    num = Number(city_info[0]);
-                    info = city_info[id];
-                    map.set(num, info);
-                  }
-                  return map;
-                }
+                  if (one_or_else == 1)
+                  {
+                    for (i = 0; i < cities_arr.length; i ++) {
+                      numeric += 1;
+                      _info = cities_arr[i].split(", ");
+                      text_data = _info[2].replace(/справа/, "position_right").replace(/слева/, "position_left").replace(/снизу/, "position_bottom").replace(/сверху/, "position_top").split("!");
 
-                let cities = new Map();
-                cities = parse_cities(cities, cities_info, 1);
+                      if (text_data[0] == "position_right" || text_data[0] == "position_left") {
+                        text_y_pos = 0;
+                        text_x_pos = text_data[1];
+                      }
+                      else if (text_data[0] == "position_bottom" || text_data[0] == "position_top") {
+                        text_y_pos = text_data[1];
+                        text_x_pos = 0;
+                      }
 
-                let cities_description = new Map();
-                cities_description = parse_cities(cities_description, cities_info, 2);
+                      let text_x_and_y = [text_x_pos, text_y_pos];
+                      text_data[1] = text_x_and_y;
 
-
-                function parse_cities2 (map, cities_str) {
-                  let cities_arr = cities_str.split("|");
-                  for (i = 0; i < cities_arr.length; i ++) {
-                    numeric += 1;
-                    _info = cities_arr[i].split(", ");
-                    // city_id = Number(_info[0]);
-                    let city_data = {
-                      position: Number(_info[0]),
-                      name: _info[1],
-                      description: _info[2]
+                      let city_data = {
+                        position: Number(_info[0]),
+                        name: _info[1],
+                        text_position: text_data,
+                        description: _info[3]
+                      }
+                      map.set(numeric, city_data);
                     }
-                    map.set(numeric, city_data);
+                    return map;
                   }
-                  return map;
+                  else
+                  {
+                    for (i = 0; i < cities_arr.length; i ++) {
+                      numeric2 += 1;
+                      _info = cities_arr[i].split(", ");
+                      text_data = _info[2].replace(/справа/, "position_right").replace(/слева/, "position_left").replace(/снизу/, "position_bottom").replace(/сверху/, "position_top").split("!");
+
+                      if (text_data[0] == "position_right" || text_data[0] == "position_left") {
+                        text_y_pos = 0;
+                        text_x_pos = text_data[1];
+                      }
+                      else if (text_data[0] == "position_bottom" || text_data[0] == "position_top") {
+                        text_y_pos = text_data[1];
+                        text_x_pos = 0;
+                      }
+
+                      let text_x_and_y = [text_x_pos, text_y_pos];
+                      text_data[1] = text_x_and_y;
+                      let city_data = {
+                        number: numeric2,
+                        name: _info[1],
+                        text_position: text_data,
+                        description: _info[3]
+                      }
+                      map.set(Number(_info[0]), city_data);
+                    }
+                    return map;
+                  }
                 }
 
-                let cities2 = new Map();
-                cities2 = parse_cities2 (cities2, cities_info);
+                cities_by_number = new Map();
+                cities_by_number = parse_cities2(cities_by_number, cities_info, 1);
+                console.log(cities_by_number);
+
+                cities_by_pos = new Map();
+                cities_by_pos = parse_cities2(cities_by_pos, cities_info, 2);
+                console.log(cities_by_pos);
 
 
-
-                // main sript
+                // main sсript
                 // var path = document.getElementById('pipka').getAttribute('d');
                 svg.innerHTML += Array(count).fill(0).map((e, i) => {
                   let len = seg * (i), p = track.getPointAtLength(len);
-                  if(cities.has(i)) {
+                  if(cities_by_pos.has(i)) {
                     pipka_x_pos = 1385 - 2.042 * (i);
                     numb +=1;
-                    // cities_id.set(numb, i);
-                    // cities_Id_desc.set(numb, cities_description.get(i));
-                    // cities_name.set(numb, cities.get(i));
+                    cities_id.set(numb, i);
                     return "<g transform=translate("+[p.x, p.y]+")>" +
                            "  <circle data-len="+len.toFixed(1)+" r=4 id="+(i)+"></circle>" +
                            //"  <rect rx=5 ry=5 x=-20 y=16 width=40 height=19></rect>" +
-                           "  <text y=20>"+cities.get(i)+"</text>"+
+                           "  <text class="+(cities_by_pos.get(i)).text_position[0]+" x="+(cities_by_pos.get(i)).text_position[1][0]+" y="+(cities_by_pos.get(i)).text_position[1][1]+">"+(cities_by_pos.get(i)).name+"</text>"+
                            "  <ellipse id="+(i)+" cx=0 cy=-10 rx=0 ry=5 stroke=none />" +
                            // "  <div id="+(i)+" class=ellipse></div>" +
                            "</g>" +
@@ -306,7 +336,7 @@
 
                 a.forEach(c => c.onclick = e => {
                   let id = getKey(c.getAttribute('id'));
-                  showAlert(cities_name.get(id), cities_Id_desc.get(id));
+                  showAlert((cities_by_number.get(id)).name, (cities_by_number.get(id)).description);
                 });
 
                 document.getElementById("side_river_wrapper").onclick = e => {
@@ -328,11 +358,11 @@
                       c.style.fill = "#E8E1C1"
                   }, 300)
                   target = +c.dataset.len;
-                  if (cities_id.has(id)) {
-                    document.querySelector('ellipse[id="'+cities_id.get(id)+'"]').setAttribute('rx', 0);
+                  if (cities_by_number.has(id)) {
+                    document.querySelector('ellipse[id="'+(cities_by_number.get(id)).position+'"]').setAttribute('rx', 0);
                   }
                   id = getKey(c.getAttribute('id'));
-                  let r = document.querySelector('rect[id="'+cities_id.get(id)+'"]')
+                  let r = document.querySelector('rect[id="'+(cities_by_number.get(id)).position+'"]')
                   r.style.fill = "#2D2E2C";
                   setTimeout(function() {
                       r.style.fill = "#E8E1C1"
@@ -376,8 +406,8 @@
                 }
 
                 function change_ellipse_radius (id, radius) {     //создает или убирает над городом иконку (в зависимости какой ты поставишь радиус кружка [0/10]), при условии id города совпадет
-                  if (cities_id.has(id)) {
-                    document.querySelector('ellipse[id="'+cities_id.get(id)+'"]').setAttribute('rx', radius);
+                  if (cities_by_number.has(id)) {
+                    document.querySelector('ellipse[id="'+(cities_by_number.get(id)).position+'"]').setAttribute('rx', radius);
                   }
                 }
 

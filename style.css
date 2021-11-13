@@ -196,6 +196,26 @@ body {
   transform: scale(2.0);
 }*/
 
+.cities {
+  /* font-size: 30px; */
+}
+
+.position_right {
+  y = 10px;
+}
+
+.position_bottom {
+
+}
+
+.position_left {
+
+}
+
+.position_top {
+
+}
+
 circle {
   cursor: pointer;
   fill: #E8E1C1;
