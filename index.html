@@ -140,23 +140,19 @@
                   for (i = 0; i < cities_arr.length; i ++) {
                     numeric += 1;
                     _info = cities_arr[i].split(", ");
-                    city_id = Number(_info[0]);
+                    // city_id = Number(_info[0]);
                     let city_data = {
-                      number: numeric,
+                      position: Number(_info[0]),
                       name: _info[1],
                       description: _info[2]
                     }
-                    map.set(city_id, city_data);
+                    map.set(numeric, city_data);
                   }
                   return map;
                 }
 
                 let cities2 = new Map();
                 cities2 = parse_cities2 (cities2, cities_info);
-                console.log(cities2);
-                console.log(cities2.get(10));
-                console.log((cities2.get(10)).name);
-                console.log(cities2.get('Горохово плотбище'));
 
 
 
@@ -167,9 +163,9 @@
                   if(cities.has(i)) {
                     pipka_x_pos = 1385 - 2.042 * (i);
                     numb +=1;
-                    cities_id.set(numb, i);
-                    cities_Id_desc.set(numb, cities_description.get(i));
-                    cities_name.set(numb, cities.get(i));
+                    // cities_id.set(numb, i);
+                    // cities_Id_desc.set(numb, cities_description.get(i));
+                    // cities_name.set(numb, cities.get(i));
                     return "<g transform=translate("+[p.x, p.y]+")>" +
                            "  <circle data-len="+len.toFixed(1)+" r=4 id="+(i)+"></circle>" +
                            //"  <rect rx=5 ry=5 x=-20 y=16 width=40 height=19></rect>" +
@@ -183,8 +179,6 @@
                            "</g>";
                   } else return "<g></g>"
                 }).join('');
-
-                console.log(cities_id);
 
                 target = +document.querySelector('circle[id="'+5+'"]').getAttribute('data-len');
                 let circles = document.querySelectorAll('circle');
