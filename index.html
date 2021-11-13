@@ -97,6 +97,8 @@
                 target = seg;
 
                 let numb = 0;
+                let city_id = 0;
+                let numeric = 0;
                 let id = 0;
                 let prev_id = 0;
                 let days = 0;
@@ -133,6 +135,31 @@
                 cities_description = parse_cities(cities_description, cities_info, 2);
 
 
+                function parse_cities2 (map, cities_str) {
+                  let cities_arr = cities_str.split("|");
+                  for (i = 0; i < cities_arr.length; i ++) {
+                    numeric += 1;
+                    _info = cities_arr[i].split(", ");
+                    city_id = Number(_info[0]);
+                    let city_data = {
+                      number: numeric,
+                      name: _info[1],
+                      description: _info[2]
+                    }
+                    map.set(city_id, city_data);
+                  }
+                  return map;
+                }
+
+                let cities2 = new Map();
+                cities2 = parse_cities2 (cities2, cities_info);
+                console.log(cities2);
+                console.log(cities2.get(10));
+                console.log((cities2.get(10)).name);
+                console.log(cities2.get('Горохово плотбище'));
+
+
+
                 // main sript
                 // var path = document.getElementById('pipka').getAttribute('d');
                 svg.innerHTML += Array(count).fill(0).map((e, i) => {
@@ -156,6 +183,8 @@
                            "</g>";
                   } else return "<g></g>"
                 }).join('');
+
+                console.log(cities_id);
 
                 target = +document.querySelector('circle[id="'+5+'"]').getAttribute('data-len');
                 let circles = document.querySelectorAll('circle');
@@ -194,8 +223,8 @@
                     stands_still = false;
                     prev_id = id;
 
-                    set_attribute_if_citie_has_correct_id (id, 0);
-                    document.querySelector('ellipse[id="'+cities_id.get(1)+'"]').setAttribute('rx', 0);
+                    change_ellipse_radius (id, 0);
+                    // document.querySelector('ellipse[id="'+cities_id.get(1)+'"]').setAttribute('rx', 0);
                   }
                   else {
                     direction = "Стоит на месте";
@@ -216,7 +245,7 @@
                         tt = 0;
                       }
                       stands_still = true;
-                      set_attribute_if_citie_has_correct_id (id, 10);
+                      change_ellipse_radius (id, 10);
                     }
                     else
                     {
@@ -225,7 +254,7 @@
                         print_hint(days, direction);
                         tt = 0;
                       }
-                      set_attribute_if_citie_has_correct_id (id, 10);
+                      change_ellipse_radius (id, 10);
                     }
                   }
 
@@ -262,7 +291,7 @@
                   let qs = document.querySelector('circle[id="'+($('.scroll').val() - 1)+'"]');
                   if (qs != null){
                     target = +qs.getAttribute('data-len');
-                    set_attribute_if_citie_has_correct_id (id, 0);
+                    change_ellipse_radius (id, 0);
                     id = getKey(qs.getAttribute('id'));
                   }
                 })
@@ -352,9 +381,9 @@
                   document.getElementById("hint").innerHTML = direction;
                 }
 
-                function set_attribute_if_citie_has_correct_id (id, int) {     //создает над городом иконку, если id города совпадет
+                function change_ellipse_radius (id, radius) {     //создает или убирает над городом иконку (в зависимости какой ты поставишь радиус кружка [0/10]), при условии id города совпадет
                   if (cities_id.has(id)) {
-                    document.querySelector('ellipse[id="'+cities_id.get(id)+'"]').setAttribute('rx', int);
+                    document.querySelector('ellipse[id="'+cities_id.get(id)+'"]').setAttribute('rx', radius);
                   }
                 }
 
