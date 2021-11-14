@@ -118,7 +118,11 @@
                 let stands_still = true;
                 let relax = false;
 
-                let cities_id = new Map();
+                let line;
+                let fs = require("fs");
+                fs.readFile('./info.txt', 'utf8', (err, data) => {
+                    line = data.split('\n')[1];
+                });
 
                 var cities_info = '5, Екатеринбург, -30!40, История про Екатеринбург|10, Горохово плотбище, 20!-10, История про Горохово плотбище|15, Макаровская пристань, 10!-20, История про Макаровская пристань|88, Ерошиха, 20!-40, История про Ерошиха|121, Оса, 0!10, История про Оса|595, Потерпельская пристань, 0!10, История про Потерпельская пристань|610, Великий Новгород, -50!10, История про Великий Новгород|665, Новая Лагода, 0!10, История про Новая Лагода|699, Санкт-Петербург, 0!10, История про Санкт-Петербург'
 
@@ -168,11 +172,9 @@
 
                 cities_by_number = new Map();
                 cities_by_number = parse_cities2(cities_by_number, cities_info, 1);
-                console.log(cities_by_number);
 
                 cities_by_pos = new Map();
                 cities_by_pos = parse_cities2(cities_by_pos, cities_info, 2);
-                console.log(cities_by_pos);
 
 
                 // main sсript
@@ -182,7 +184,6 @@
                   if(cities_by_pos.has(i)) {
                     pipka_x_pos = 1385 - 2.042 * (i);
                     numb +=1;
-                    cities_id.set(numb, i);
                     return "<g transform=translate("+[p.x, p.y]+")>" +
                            "  <circle data-len="+len.toFixed(1)+" r=4 id="+(i)+"></circle>" +
                            //"  <rect rx=5 ry=5 x=-20 y=16 width=40 height=19></rect>" +
@@ -235,7 +236,6 @@
                     prev_id = id;
 
                     change_ellipse_radius (id, 0);
-                    // document.querySelector('ellipse[id="'+cities_id.get(1)+'"]').setAttribute('rx', 0);
                   }
                   else {
                     direction = "Стоит на месте";
@@ -301,9 +301,7 @@
                 $('.scroll').on('input',function(){
                   let qs = document.querySelector('circle[id="'+($('.scroll').val() - 1)+'"]');
                   if (qs != null){
-                    target = +qs.getAttribute('data-len');
-                    change_ellipse_radius (id, 0);
-                    id = getKey(qs.getAttribute('id'));
+                    animate(qs);
                   }
                 })
 
@@ -340,25 +338,25 @@
                   });
 
                 circles.forEach(c => c.onclick = e => {
+                  animate(c);
+                });
+
+                function animate(c) {
                   c.style.fill = "#2D2E2C";
-                  setTimeout(function() {
-                      c.style.fill = "#E8E1C1"
-                  }, 300)
                   target = +c.dataset.len;
                   if (cities_by_number.has(id)) {
                     document.querySelector('ellipse[id="'+(cities_by_number.get(id)).position+'"]').setAttribute('rx', 0);
+                    document.querySelector('rect[id="'+(cities_by_number.get(id)).position+'"]').setAttribute('y', 0);
+                    document.querySelector('circle[id="'+(cities_by_number.get(id)).position+'"]').style.fill = "#E8E1C1";
                   }
                   id = getKey(c.getAttribute('id'));
                   let r = document.querySelector('rect[id="'+(cities_by_number.get(id)).position+'"]')
-                  r.style.fill = "#2D2E2C";
-                  setTimeout(function() {
-                      r.style.fill = "#E8E1C1"
-                  }, 300)
+                  r.setAttribute('y', -5);
                   document.getElementById('scroll').value = Number(c.getAttribute("id")) + 1;
                   if (id == 0){
                     id = 0.1;
                   }
-                });
+                }
 
                 var timeout;
                 circles.forEach(c => {
@@ -399,7 +397,7 @@
                 }
 
                 function getKey(value) {
-                  return [...cities_id].find(([key, val]) => val == value)[0]
+                  return cities_by_pos.get(Number(value)).number
                 }
             </script>
           </div>
