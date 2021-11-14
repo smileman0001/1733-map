@@ -255,11 +255,15 @@ footer {
     width: 100%;
 }*/
 .pipka {
-  fill: #E8E1C1;
+  fill: #2D2E2C;
   stroke: #2D2E2C;
-  stroke-width: 2px;
+  stroke-width: 0px;
+  border-radius: 4px;
+
 }
 .scroll {
+    padding: none;
+    margin: none;
     -webkit-appearance: none;
     width: 100%;
     height: 13px;
