@@ -86,14 +86,14 @@
                 <!-- small texture above scroll -->
                 <path id="pipka" d="M2.92427 8.44004C3.07881 8.78092 3.41847 8.99988 3.79275 8.99988C4.15393 8.99988 4.48411 8.79581 4.64563 8.47276L6.36588 5.03223C7.29217 3.17962 5.94501 0.999878 3.87373 0.999878C1.8485 0.999878 0.499827 3.09207 1.33603 4.93661L2.92427 8.44004Z" fill="none" stroke="none" stroke-width="2"/>
               </svg>
-
               <script src="modal.js"></script>
               <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
               <script src="https://atuin.ru/demo/ui-slider/jquery-ui.min.js"></script>
 
               <link rel="stylesheet" href="https://atuin.ru/demo/ui-slider/jquery-ui.css">
               <input class="scroll" id = "scroll" type="range" min="0" max="700" step="1" value="5">
-
+              <link href="toast.min.css" rel="stylesheet">
+              <script src="toast.js"></script>
               <script type="text/javascript">
                 let count = 700,
                 len = track.getTotalLength(),
@@ -118,6 +118,24 @@
                 let stands_still = true;
                 let relax = false;
 
+                // function readTextFile(file)
+                // {
+                //     var rawFile = new XMLHttpRequest();
+                //     rawFile.open("GET", file, false);
+                //     rawFile.onreadystatechange = function ()
+                //     {
+                //         if(rawFile.readyState === 4)
+                //         {
+                //             if(rawFile.status === 200 || rawFile.status == 0)
+                //             {
+                //                 var allText = rawFile.responseText;
+                //                 alert(allText);
+                //             }
+                //         }
+                //     }
+                //     rawFile.send(null);
+                // }
+                // readTextFile("file:///A:/Проекты Unity/Project — копия/1733-map/info.txt");
                 var cities_info = '5, Екатеринбург, -30!40, История про Екатеринбург|10, Горохово плотбище, 20!-10, История про Горохово плотбище|15, Макаровская пристань, 10!-20, История про Макаровская пристань|88, Ерошиха, 20!-40, История про Ерошиха|121, Оса, 0!10, История про Оса|595, Потерпельская пристань, 0!10, История про Потерпельская пристань|610, Великий Новгород, -50!10, История про Великий Новгород|665, Новая Лагода, 0!10, История про Новая Лагода|699, Санкт-Петербург, 0!10, История про Санкт-Петербург'
 
                 function parse_cities2 (map, cities_str, one_or_else) {
@@ -192,6 +210,18 @@
                   } else return "<g></g>"
                 }).join('');
 
+
+
+                new Toast({
+                  title: 'Информация',
+                  text: 'Для получения более подробной информации вы можете нажать на овал, появляющийся над текущим городом',
+                  theme: 'light',
+                  autohide: false,
+                  interval: 10000
+                });
+
+
+                
                 target = +document.querySelector('circle[id="'+5+'"]').getAttribute('data-len');
                 let circles = document.querySelectorAll('circle');
                 let a = document.querySelectorAll('ellipse');
