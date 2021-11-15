@@ -101,7 +101,8 @@ header {
 }
 
 .logo_map:hover {
-  color: #F0F0F0;
+  border: 1px solid #2D2E2C;
+  background-color: #2D2E2C;
 }
 
 .logo_map {
