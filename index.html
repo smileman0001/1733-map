@@ -205,7 +205,7 @@
                     return "<g transform=translate("+[p.x, p.y]+")>" +
                            "  <circle data-len="+len.toFixed(1)+" r=4 id="+(i)+"></circle>" +
                            //"  <rect rx=5 ry=5 x=-20 y=16 width=40 height=19></rect>" +
-                           "  <text fill=#2D2E2C class=cities x="+(cities_by_pos.get(i)).text_position[0]+" y="+(cities_by_pos.get(i)).text_position[1]+">"+(cities_by_pos.get(i)).name+"</text>"+
+                           "  <text id="+(i)+" fill=#2D2E2C class=cities x="+(cities_by_pos.get(i)).text_position[0]+" y="+(cities_by_pos.get(i)).text_position[1]+">"+(cities_by_pos.get(i)).name+"</text>"+
                            "  <ellipse id="+(i)+" cx=0 cy=-10 rx=0 ry=5 stroke=none />" +
                            // "  <div id="+(i)+" class=ellipse></div>" +
                            "</g>" +
@@ -372,12 +372,17 @@
                 });
 
                 function animate(c) {
+                  // if (typeof c == text) {
+                  //   c.style.fill = "white";
+                  // }
+                  console.log(typeof c)
                   c.style.fill = "#2D2E2C";
                   target = +c.dataset.len;
                   if (cities_by_number.has(id)) {
                     document.querySelector('ellipse[id="'+(cities_by_number.get(id)).position+'"]').setAttribute('rx', 0);
                     document.querySelector('rect[id="'+(cities_by_number.get(id)).position+'"]').setAttribute('y', 0);
                     document.querySelector('circle[id="'+(cities_by_number.get(id)).position+'"]').style.fill = "#E8E1C1";
+                    document.querySelector('text[id="'+(cities_by_number.get(id)).position+'"]').style.fill = "#2D2E2C";
                   }
                   id = getKey(c.getAttribute('id'));
                   let r = document.querySelector('rect[id="'+(cities_by_number.get(id)).position+'"]')
@@ -420,7 +425,7 @@
                   document.getElementById("hint").innerHTML = direction;
                 }
 
-                function change_ellipse_radius (id, radius) {     //создает или убирает над городом иконку (в зависимости какой ты поставишь радиус кружка [0/10]), при условии id города совпадет
+                function change_ellipse_radius (id, radius) {     //создает или убирает над городом иконку (в зависимости какой ты поставишь радиус кружка [0/10]), при условии, что id города совпадет
                   if (cities_by_number.has(id)) {
                     document.querySelector('ellipse[id="'+(cities_by_number.get(id)).position+'"]').setAttribute('rx', radius);
                   }
