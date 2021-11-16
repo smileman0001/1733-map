@@ -243,17 +243,17 @@ footer {
   padding-right: 30px;
   padding-top: 50px;
 }
-#date {
+/* #date {
   font-size: 38px;
-}
+} */
 #hint {
-  text-align: center;
+  text-align: left;
   padding-top: 10px;
   font-size: 14px;
 }
 #time {
-  padding-top: 20px;
-  text-align: center;
+  /* padding-top: 0px; */
+  text-align: left;
   font-size: 36px;
 }
 
