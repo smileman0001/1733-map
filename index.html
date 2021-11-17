@@ -382,11 +382,12 @@
                     document.querySelector('ellipse[id="'+(cities_by_number.get(id)).position+'"]').setAttribute('rx', 0);
                     document.querySelector('rect[id="'+(cities_by_number.get(id)).position+'"]').setAttribute('y', 0);
                     document.querySelector('circle[id="'+(cities_by_number.get(id)).position+'"]').style.fill = "#E8E1C1";
-                    document.querySelector('text[id="'+(cities_by_number.get(id)).position+'"]').style.fill = "#2D2E2C";
+                    document.querySelector('text[id="'+(cities_by_number.get(id)).position+'"]').style.fontWeight = "normal";
                   }
                   id = getKey(c.getAttribute('id'));
                   let r = document.querySelector('rect[id="'+(cities_by_number.get(id)).position+'"]')
                   r.setAttribute('y', -5);
+                  document.querySelector('text[id="'+(cities_by_number.get(id)).position+'"]').style.fontWeight = "bold";
                   document.getElementById('scroll').value = Number(c.getAttribute("id")) + 1;
                   if (id == 0){
                     id = 0.1;
