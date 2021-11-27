@@ -208,6 +208,12 @@ circle {
   stroke-width: 2px;
   transition: 0.5s;
 }
+
+.moscow_circle {
+  fill: #2D2E2C;
+  stroke: #2D2E2C;
+}
+
 rect {
   fill: transparent;
   transition: 0.5s;
