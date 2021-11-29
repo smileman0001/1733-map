@@ -210,9 +210,10 @@ circle {
 }
 
 .moscow_circle {
-  fill: #2D2E2C;
+  fill: none;
   stroke: #2D2E2C;
 }
+
 
 rect {
   fill: transparent;

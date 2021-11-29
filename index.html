@@ -67,7 +67,7 @@
                     09.04.1731
                 </div> -->
                 <div id = "time" class = "hints">
-                  0 дней
+                  <!-- 0 дней -->
                 </div>
                 <div id ="hint" class = "hints">
                   Cтоит на месте
@@ -87,28 +87,28 @@
                 </g>
                 <!-- Murom city on side_river -->
                 <g transform="translate(525,380)">
-                  <circle class="moscow_circle" cx="3" cy="3" r="3" fill="#E8E1C1" stroke="#2D2E2C"/>
+                  <circle class="moscow_circle" cx="3" cy="3" r="4" fill="#E8E1C1" stroke="#2D2E2C"/>
                   <text x=15 y=6 fill="#2D2E2C">
                     Муром
                   </text>
                 </g>
                 <!-- Ryazan city on side_river -->
                 <g transform="translate(422,452)">
-                  <circle class="moscow_circle" cx="3" cy="3" r="3" fill="#E8E1C1" stroke="#2D2E2C"/>
+                  <circle class="moscow_circle" cx="3" cy="3" r="4" fill="#E8E1C1" stroke="#2D2E2C"/>
                   <text x=-48 y=6 fill="#2D2E2C">
                     Рязань
                   </text>
                 </g>
                 <!-- Kolomna city on side_river -->
                 <g transform="translate(380,420)">
-                  <circle class="moscow_circle" cx="3" cy="3" r="3" fill="#E8E1C1" stroke="#2D2E2C"/>
+                  <circle class="moscow_circle" cx="3" cy="3" r="4" fill="#E8E1C1" stroke="#2D2E2C"/>
                   <text x=-58 y=6 fill="#2D2E2C">
                     Коломна
                   </text>
                 </g>
                 <!-- Moscow city on side_river -->
                 <g transform="translate(327,367)">
-                  <circle class="moscow_circle" cx="3" cy="3" r="3" fill="#E8E1C1" stroke="#2D2E2C"/>
+                  <circle class="moscow_circle" cx="3" cy="3" r="4" fill="#E8E1C1" stroke="#2D2E2C"/>
                   <text x=-20 y=-8 fill="#2D2E2C">
                     Москва
                   </text>
@@ -123,10 +123,34 @@
               <script src="https://atuin.ru/demo/ui-slider/jquery-ui.min.js"></script>
 
               <link rel="stylesheet" href="https://atuin.ru/demo/ui-slider/jquery-ui.css">
-              <input class="scroll" id = "scroll" type="range" min="0" max="700" step="1" value="5">
+              <input class="scroll" id = "scroll" type="range" min="0" max="700" step="1" value="20">
               <link href="toast.min.css" rel="stylesheet">
               <script src="toast.js"></script>
               <script type="text/javascript">
+                function zero_first_format(value)
+                {
+                    if (value < 10)
+                    {
+                        value='0'+value;
+                    }
+                    return value;
+                }
+
+                /* функция получения текущей даты и времени */
+                function date_time()
+                {
+                    var current_datetime = new Date();
+                    var day = zero_first_format(current_datetime.getDate());
+                    var month = zero_first_format(current_datetime.getMonth()+1);
+                    var year = current_datetime.getFullYear();
+
+                    return day+"."+month+"."+year;
+                }
+
+                /* выводим текущую дату и время на сайт в блок с id "current_date_time_block" */
+                document.getElementById('time').innerHTML = date_time();
+
+
                 let count = 700,
                 len = track.getTotalLength(),
                 seg = len / (count+1),
@@ -150,26 +174,7 @@
                 let stands_still = true;
                 let relax = false;
 
-                // function readTextFile(file)
-                // {
-                //     var rawFile = new XMLHttpRequest();
-                //     rawFile.open("GET", file, false);
-                //     rawFile.onreadystatechange = function ()
-                //     {
-                //         if(rawFile.readyState === 4)
-                //         {
-                //             if(rawFile.status === 200 || rawFile.status == 0)
-                //             {
-                //                 var allText = rawFile.responseText;
-                //                 alert(allText);
-                //             }
-                //         }
-                //     }
-                //     rawFile.send(null);0!0
-                // }
-                // readTextFile("file:///A:/Проекты Unity/Project — копия/1733-map/info.txt");
-                // 5, Екатеринбург, 15!5, История про Екатеринбург|10, Горохово плотбище, -121!10, История про Горохово плотбище|15, Макаровская пристань, -150!5, История про Макаровская пристань|
-                var cities_info = '20, Уткинская пристань, 10!3, История про Уткинская пристань|25, Каменская пильная мельница, 10!2, История про Каменская пильная мельница|30, Курьинская пристань, 10!0, История про Курьинская пристань|35, Илимская пристань, -123!10, История про Илимская пристань|40, Сулемская пристань, 10!0, История про Сулемская пристань|50, Ослянская пристань, 10!0, История про Ослянская пристань|60, Камасино, 0!-10, История про Камасино|70, Чусовские городки, -55!-40, История про Чусовские городки|81, Васильев луг, -80!-20, История про Васильев луг|88, Ерошиха, -60!-10, История про Ерошиха|121, Оса, -30!-3, История про Оса|158, Сарапул, 10!0, История про Сарапул|175, Елабуга, 10!9, История про Елабуга|205, Свиные горы, -33!-22, История про Свиные горы|230, Рыбная слобода, 0!18, История про Рыбная слобода|240, Лаишево, -30!20, История про Лаишево|257, Казань, 10!3, История про Казань|260, Верхний Услон, -18!-10, История про Верхний Услон|290, Чебоксары, 10!-3, История про Чебоксары|298, Козьмодемьянск, -50!-10, История про Козьмодемьянск|320, Макарьевская ярмарка, -58!18, История про Макарьевская ярмарка|335, Нижний Новгород, -120!4, История про Нижний Новгород|340, Балахна, -5!-10, История про Балахна|400, Кострома, 5!-5, История про Кострома|415, Ярославль, -10!20, История про Ярославль|430, Рыбная Слобода, 0!-10, История про Рыбная Слобода|440, Молога, -25!-10, История про Молога|450, Мышкино, -70!3, История про Мышкино|460, Углич, 12!0, История про Углич|470, Калязин, 5!15, История про Калязин|510, Тверь, 0!-10, История про Тверь|518, Торжок, -35!16, История про Торжок|540, Вышний Волочёк, 8!0, История про Вышний Волочёк|580, Опеченская пристань, 10!0, История про Опеченская пристань|585, Боровичи, -15!-15, История про Боровичи|595, Потерпельская пристань, -150!-10, История про Потерпельская пристань|610, Великий Новгород, -50!20, История про Великий Новгород|665, Новая Лагода, 15!0, История про Новая Лагода|680, Шлиссельбург, -50!-14, История про Шлиссельбург|699, Санкт-Петербург, -40!25, История про Санкт-Петербург'
+                var cities_info = '1, Екатеринбург, 15!5, История про Екатеринбург|5, Горохово плотбище, -121!10, История про Горохово плотбище|10, Макаровская пристань, -150!5, История про Макаровская пристань|20, Уткинская пристань, 10!3, История про Уткинская пристань|25, Каменская пильная мельница, 10!2, История про Каменская пильная мельница|30, Курьинская пристань, 10!0, История про Курьинская пристань|35, Илимская пристань, -123!10, История про Илимская пристань|40, Сулемская пристань, 10!0, История про Сулемская пристань|50, Ослянская пристань, 10!0, История про Ослянская пристань|60, Камасино, 0!-10, История про Камасино|70, Чусовские городки, -55!-40, История про Чусовские городки|81, Васильев луг, -80!-20, История про Васильев луг|88, Ерошиха, -60!-10, История про Ерошиха|121, Оса, -30!-3, История про Оса|158, Сарапул, 10!0, История про Сарапул|175, Елабуга, 10!9, История про Елабуга|205, Свиные горы, -33!-22, История про Свиные горы|230, Рыбная слобода, 0!18, История про Рыбная слобода|240, Лаишево, -30!20, История про Лаишево|257, Казань, 10!3, История про Казань|260, Верхний Услон, -18!-10, История про Верхний Услон|290, Чебоксары, 10!-3, История про Чебоксары|298, Козьмодемьянск, -50!-10, История про Козьмодемьянск|320, Макарьевская ярмарка, -58!18, История про Макарьевская ярмарка|335, Нижний Новгород, -120!4, История про Нижний Новгород|340, Балахна, -5!-10, История про Балахна|400, Кострома, 5!-5, История про Кострома|415, Ярославль, -10!20, История про Ярославль|430, Рыбная Слобода, 0!-10, История про Рыбная Слобода|440, Молога, -25!-10, История про Молога|450, Мышкино, -70!3, История про Мышкино|460, Углич, 12!0, История про Углич|470, Калязин, 5!15, История про Калязин|510, Тверь, 0!-10, История про Тверь|518, Торжок, -35!16, История про Торжок|540, Вышний Волочёк, 8!0, История про Вышний Волочёк|580, Опеченская пристань, 10!0, История про Опеченская пристань|585, Боровичи, -15!-15, История про Боровичи|595, Потерпельская пристань, -150!-10, История про Потерпельская пристань|610, Великий Новгород, -50!20, История про Великий Новгород|665, Новая Лагода, 15!0, История про Новая Лагода|680, Шлиссельбург, -50!-14, История про Шлиссельбург|699, Санкт-Петербург, -40!25, История про Санкт-Петербург'
 
                 function parse_cities2 (map, cities_str, one_or_else) {
                   let cities_arr = cities_str.split("|");
@@ -228,9 +233,21 @@
                 svg.innerHTML += Array(count).fill(0).map((e, i) => {
                   let len = seg * (i), p = track.getPointAtLength(len);
                   if(cities_by_pos.has(i)) {
-                    pipka_x_pos = 1474 - 2.181 * (i);
+
+                    if(i != 1 && i != 10 && i !=5)
+                    {
+                      pipka_x_pos = 1474 - 2.181 * (i);                    
+                    }
+                    
                     numb +=1;
-                    return "<g transform=translate("+[p.x, p.y]+")>" +
+                    let x = p.x;
+                    let y = p.y;
+                    if(i == 1)
+                    {
+                      x = 1350;
+                      y = 280;
+                    }
+                    return "<g transform=translate("+[x, y]+")>" +
                            "  <circle data-len="+len.toFixed(1)+" r=4 id="+(i)+"></circle>" +
                            //"  <rect rx=5 ry=5 x=-20 y=16 width=40 height=19></rect>" +
                            "  <text id="+(i)+" fill=#2D2E2C class=cities x="+(cities_by_pos.get(i)).text_position[0]+" y="+(cities_by_pos.get(i)).text_position[1]+">"+(cities_by_pos.get(i)).name+"</text>"+
@@ -302,13 +319,13 @@
                     if(stands_still === false)
                     {
                       if (id == 0){
-                        id = 1;
+                        id = 4;
                       }
                       if(id == 0.1){
                         id = 0;
                       }
                       // id +=1;
-                      if(id == 1){
+                      if(id == 4){
                         days = 0;
                         print_hint(days, direction);
                         tt = 0;
@@ -318,7 +335,7 @@
                     }
                     else
                     {
-                      if(id == 1){
+                      if(id == 4){
                         days = 0;
                         print_hint(days, direction);
                         tt = 0;
@@ -357,9 +374,13 @@
                 let value = $('.scroll').prev().attr('value');
                 $('.scroll').html(value);
                 $('.scroll').on('input',function(){
-                  let qs = document.querySelector('circle[id="'+($('.scroll').val() - 1)+'"]');
-                  if (qs != null){
-                    animate(qs);
+                  let i = $('.scroll').val() - 1;
+                  if(i != 1 && i != 10 && i !=5)
+                  {
+                    let qs = document.querySelector('circle[id="'+($('.scroll').val() - 1)+'"]');
+                    if (qs != null){
+                      animate(qs);
+                    }                   
                   }
                 })
 
@@ -396,9 +417,15 @@
                   });
 
                 circles.forEach(c => c.onclick = e => {
-                  // i = c.getAttribute('id');
-                  // if(i != 5 && i != 10 && )
-                  animate(c);
+                  let i = c.getAttribute('id');
+                  if(i != 1 && i != 10 && i !=5)
+                  {
+                    animate(c);                    
+                  }
+                  else {
+                    let id = getKey(c.getAttribute('id'));
+                    showAlert((cities_by_number.get(id)).name, (cities_by_number.get(id)).description);
+                  }
                 });
 
                 function animate(c) {
@@ -426,16 +453,25 @@
 
                 var timeout;
                 circles.forEach(c => {
-                  c.onmouseover = function(e) {
+                  let i = c.getAttribute('id');
+                  if(i != 5 && i != 10 && i !=1)
+                  {
+                    c.onmouseover = function(e) {
                     timeout = setTimeout(function() {
                         c.setAttribute('r', 6)
                     }, 10)
-                  };
-                  c.onmouseout = function(e) {
-                      timeout = setTimeout(function() {
-                        c.setAttribute('r', 4)
-                    }, 10)
-                  };
+                    };
+                    c.onmouseout = function(e) {
+                        timeout = setTimeout(function() {
+                          c.setAttribute('r', 4)
+                      }, 10)
+                    };                  
+                  }
+                  else
+                  {
+                    c.style.fill = "#2D2E2C";
+                    c.setAttribute('r', 3)
+                  }
                 });
 
 
@@ -452,7 +488,7 @@
                   else
                     word_day =  " дней";
 
-                  document.getElementById("time").innerHTML = days + word_day;
+                  // document.getElementById("time").innerHTML = days + word_day;
                   document.getElementById("hint").innerHTML = direction;
                 }
 
