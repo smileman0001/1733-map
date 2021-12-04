@@ -26,7 +26,7 @@ let text_y_pos = 0;
 let with_the_flow = true; //по течению или против
 let stands_still = true;
 let relax = false;
-let modal = document.querySelector("#modal");
+let modal = new bootstrap.Modal(document.querySelector("#modal"));
 var current_datetime = new Date(1731, 3, 15);
 
 function date_time() {
@@ -262,15 +262,8 @@ $('.scroll').on('input', function () {
 })
 
 
-//alert scripts
-//function showAlert(title_str, content_str) {
-//    modal.querySelector("#popup-modal-header").innerHTML = title_str;
-//    modal.querySelector("#popup-modal-body").innerHTML = content_str;
-//    $(modal).modal();
-//}
-
 a.forEach(c => c.onclick = e => {
-    $(modal).modal();
+    modal.toggle();
 });
 
 document.getElementById("side_river_wrapper").onclick = e => {
@@ -296,7 +289,7 @@ circles.forEach(c => c.onclick = e => {
         e.preventDefault();
         animate(c);
     } else {
-        $(modal).modal();
+        modal.toggle();
     }
 });
 
