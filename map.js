@@ -97,7 +97,6 @@ function map_cities(map, cities,one_or_else) {
 
 let temporary = document.getElementById("temporary");
 all_cities = JSON.parse(temporary.text);
-console.log(all_cities);
 temporary.remove();
 
 cities_by_number = new Map();
